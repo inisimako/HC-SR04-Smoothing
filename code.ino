@@ -1,11 +1,12 @@
 const int triggerPin = 7;
 const int echoPin = 6;
 unsigned int distance = 0;
+
 const int numReadings = 10;
-int readings[numReadings];
-int readIndex = 0;
-int total = 0;
-int average = 0;
+unsigned int readings[numReadings];
+unsigned int readIndex = 0;
+unsigned int total = 0;
+unsigned int average = 0;
 
 void setup() {
   pinMode(triggerPin, OUTPUT);
@@ -37,7 +38,7 @@ int getDistance() {
   return rawDistance;
 }
 
-int smoothThis(int rawDistance)
+int smoothThis(unsigned int rawDistance)
 {
   total = total - readings[readIndex];
   readings[readIndex] = rawDistance;

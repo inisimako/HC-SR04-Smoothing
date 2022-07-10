@@ -19,6 +19,7 @@ const fetchFonts = () => {
     'Poppins-Bold': require('../fonts/Poppins-Bold.ttf'),
     'Poppins-Regular': require('../fonts/Poppins-Regular.ttf'),
     'Poppins-Italic': require('../fonts/Poppins-Italic.ttf'),
+    'Poppins-Light': require('../fonts/Poppins-Light.ttf'),
   });
 };
 
@@ -45,107 +46,84 @@ export default function Register() {
         resizeMode="cover"
         style={styles.image}
       >
-        {/*Judul dan Logo*/}
-        <View
-          style={{
-            height: 250,
-            width: Dimensions.get('window').width * 0.63,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Feather name="zap" size={80} color="white" />
+        {/*Register Title*/}
+        <View style={{width: 300}}>
           <Text
             style={{
-              fontFamily: 'Poppins-Italic',
-              fontSize: 14,
-              color: 'white',
-              textAlign: 'center',
-              paddingTop: 10,
+              fontSize: 30,
+              color: '#636e72',
+              textAlign: 'left',
+              paddingTop: 0,
+              paddingTop: 100,
+              paddingBottom: 150,
             }}
           >
-            "Monitoring dan Isi Ulang Token Listrik"
+            Create Account
           </Text>
         </View>
+        {/*Label Email */}
+        <View style={{width: 300}}>
+          <Text style={styles.inputLabel}>Email Address</Text>
+        </View>
 
-        <View style={styles.containerCard}>
-          {/*Register Title*/}
-          <View style={{width: 300}}>
-            <Text
-              style={{
-                fontFamily: 'Poppins-Bold',
-                fontSize: 25,
-                color: '#636e72',
-                textAlign: 'left',
-              }}
-            >
-              Register
-            </Text>
-          </View>
-          {/*Label Email */}
-          <View style={{width: 300}}>
-            <Text style={styles.inputLabel}>Email</Text>
-          </View>
+        {/*Text Input Email*/}
+        <View style={styles.input}>
+          <Feather name="user" size={22} color="#bdc3c7" />
+          <TextInput
+            value={email}
+            onChangeText={(value) => setEmail(value)}
+            placeholder="Enter EMail"
+            style={styles.inputText}
+          ></TextInput>
+          <View style={{width: 22}}></View>
+        </View>
 
-          {/*Text Input Email*/}
-          <View style={styles.input}>
-            <Feather name="user" size={22} color="#bdc3c7" />
-            <TextInput
-              value={email}
-              onChangeText={(value) => setEmail(value)}
-              placeholder="Masukkan E-Mail"
-              style={styles.inputText}
-            ></TextInput>
-            <View style={{width: 22}}></View>
-          </View>
+        {/*Label Password */}
+        <View style={{width: 300}}>
+          <Text style={styles.inputLabel}>Password</Text>
+        </View>
 
-          {/*Label Password */}
-          <View style={{width: 300}}>
-            <Text style={styles.inputLabel}>Password</Text>
-          </View>
+        {/*Text Input Password*/}
+        <View style={styles.input}>
+          <Feather name="lock" size={22} color="#bdc3c7" />
 
-          {/*Text Input Password*/}
-          <View style={styles.input}>
-            <Feather name="lock" size={22} color="#bdc3c7" />
+          <TextInput
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+            placeholder="Enter Password"
+            style={styles.inputText}
+            secureTextEntry={showPassword}
+          ></TextInput>
 
-            <TextInput
-              value={password}
-              onChangeText={(value) => setPassword(value)}
-              placeholder="Masukkan Password"
-              style={styles.inputText}
-              secureTextEntry={showPassword}
-            ></TextInput>
-
-            {/*Show Password*/}
-            <TouchableOpacity
-              style={{height: 24, width: 24}}
-              onPress={passwordVisibility}
-            >
-              <Feather name={eye} size={22} color="#bdc3c7"></Feather>
-            </TouchableOpacity>
-          </View>
-
-          {/*Login Button*/}
+          {/*Show Password*/}
           <TouchableOpacity
-            //onPress={submit}
-            activeOpacity={0.8}
-            style={styles.globalButton}
+            style={{height: 24, width: 24}}
+            onPress={passwordVisibility}
           >
-            <Text style={styles.buttonText}>Register</Text>
+            <Feather name={eye} size={22} color="#bdc3c7"></Feather>
           </TouchableOpacity>
+        </View>
 
-          <View style={{marginTop: 20, flexDirection: 'row'}}>
-            <Text style={{color: '#636e72'}}>Sudah punya akun? </Text>
-            <Text
-              //onPress={() => navigation.navigate('Login')}
-              style={{color: '#8e44ad', fontWeight: 'bold'}}
-            >
-              Login
-            </Text>
-          </View>
+        {/*Login Button*/}
+        <TouchableOpacity
+          //onPress={submit}
+          activeOpacity={0.8}
+          style={styles.globalButton}
+        >
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
+
+        <View style={{marginTop: 20, flexDirection: 'row'}}>
+          <Text style={{color: '#636e72'}}>Already have an account? </Text>
+          <Text
+            //onPress={() => navigation.navigate('Login')}
+            style={{color: '#6522A8', fontWeight: 'bold'}}
+          >
+            Login
+          </Text>
         </View>
       </ImageBackground>
+      {/* </View> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -157,14 +135,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  containerCard: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: Dimensions.get('window').width,
-    borderRadius: 25,
-    paddingTop: 20,
-  },
+
   input: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -173,7 +144,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: 10,
     borderWidth: 1,
-    borderColor: '#bdc3c7',
+    borderColor: '#6522A8',
     color: '#bdc3c7',
     borderRadius: 25,
     paddingLeft: 10,
@@ -197,7 +168,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     marginTop: 20,
-    backgroundColor: '#8e44ad',
+    backgroundColor: '#6522A8',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
@@ -209,11 +180,9 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width * 1.1,
+    height: Dimensions.get('window').height * 1.1,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });

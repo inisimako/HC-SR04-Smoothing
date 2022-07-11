@@ -1,9 +1,12 @@
 import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, Text, View} from 'react-native';
-import Router from './assets/pages/router';
 
-export default function App() {
-  return <View />;
+export default function Home() {
+  return (
+    <View style={styles.container}>
+      <Text>Hello i'm Home Page</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

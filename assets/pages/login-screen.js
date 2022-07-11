@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {
-  Image,
   StyleSheet,
   Text,
   View,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
+  ToastAndroid,
 } from 'react-native';
 import {Feather} from '@expo/vector-icons';
 import {StatusBar} from 'expo-status-bar';
@@ -19,16 +19,18 @@ const fetchFonts = () => {
     'Poppins-Bold': require('../fonts/Poppins-Bold.ttf'),
     'Poppins-Regular': require('../fonts/Poppins-Regular.ttf'),
     'Poppins-Italic': require('../fonts/Poppins-Italic.ttf'),
-    'Poppins-Light': require('../fonts/Poppins-Light.ttf'),
   });
 };
 
-export default function Register() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const [eye, setEye] = useState('eye-off');
 
+  const showToast = () => {
+    ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+  };
   useEffect(() => {
     fetchFonts();
   }, []);
@@ -46,21 +48,21 @@ export default function Register() {
         resizeMode="cover"
         style={styles.image}
       >
-        {/*Register Title*/}
+        {/*Login Title*/}
         <View style={{width: 300}}>
           <Text
             style={{
               fontSize: 30,
               color: '#636e72',
-              textAlign: 'left',
-              paddingTop: 0,
               paddingTop: 100,
               paddingBottom: 150,
+              fontWeight: 'bold',
             }}
           >
-            Create Account
+            Login
           </Text>
         </View>
+
         {/*Label Email */}
         <View style={{width: 300}}>
           <Text style={styles.inputLabel}>Email Address</Text>
@@ -72,7 +74,7 @@ export default function Register() {
           <TextInput
             value={email}
             onChangeText={(value) => setEmail(value)}
-            placeholder="Enter EMail"
+            placeholder="Enter Email"
             style={styles.inputText}
           ></TextInput>
           <View style={{width: 22}}></View>
@@ -110,20 +112,19 @@ export default function Register() {
           activeOpacity={0.8}
           style={styles.globalButton}
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <View style={{marginTop: 20, flexDirection: 'row'}}>
-          <Text style={{color: '#636e72'}}>Already have an account? </Text>
+          <Text style={{color: '#636e72'}}>Don't have an account? </Text>
           <Text
-            //onPress={() => navigation.navigate('Login')}
-            style={{color: '#6522A8', fontWeight: 'bold'}}
+            onPress={() => navigation.navigate('Register')}
+            style={{color: '#8e44ad', fontWeight: 'bold'}}
           >
-            Login
+            Create Account
           </Text>
         </View>
       </ImageBackground>
-      {/* </View> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -144,8 +145,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginTop: 10,
     borderWidth: 1,
-    borderColor: '#6522A8',
-    color: '#bdc3c7',
+    borderColor: '#636e72',
     borderRadius: 25,
     paddingLeft: 10,
     paddingRight: 10,
@@ -154,14 +154,12 @@ const styles = StyleSheet.create({
     width: 200,
     height: 30,
     color: '#636e72',
-    borderRadius: 25,
   },
 
   inputLabel: {
     fontSize: 14,
     color: '#636e72',
     marginTop: 10,
-    textAlign: 'left',
     fontWeight: 'bold',
   },
   globalButton: {

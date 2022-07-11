@@ -12,6 +12,8 @@ import {
 import {Feather} from '@expo/vector-icons';
 import {StatusBar} from 'expo-status-bar';
 import * as Font from 'expo-font';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {initializeApp, getApps} from 'firebase/app';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -22,18 +24,50 @@ const fetchFonts = () => {
   });
 };
 
-export default function Login() {
+export default function Login({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
   const [eye, setEye] = useState('eye-off');
 
-  const showToast = () => {
-    ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
-  };
   useEffect(() => {
     fetchFonts();
   }, []);
+
+  const firebaseConfig = {
+    apiKey: 'AIzaSyCzz4knGX75Eq8kzZApA9ZeddbP6gnaH1M',
+    authDomain: 'aplikasi-token-listrik.firebaseapp.com',
+    databaseURL: 'https://aplikasi-token-listrik-default-rtdb.firebaseio.com',
+    projectId: 'aplikasi-token-listrik',
+    storageBucket: 'aplikasi-token-listrik.appspot.com',
+    messagingSenderId: '601223677873',
+    appId: '1:601223677873:web:54922117f75408bb0e5f90',
+    measurementId: 'G-J7LZGHZQYG',
+  };
+
+  // Initialize Firebase
+  if (!getApps().length) {
+    initializeApp(firebaseConfig);
+  }
+
+  const auth = getAuth();
+  const submit = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigation.navigate('Home');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode == 'auth/wrong-password') {
+          ToastAndroid.show('Wrong password!', ToastAndroid.LONG);
+        } else if (errorCode == 'auth/user-not-found') {
+          ToastAndroid.show('User not found!', ToastAndroid.LONG);
+        }
+      });
+  };
 
   const passwordVisibility = () => {
     setShowPassword(!showPassword);
@@ -108,7 +142,7 @@ export default function Login() {
 
         {/*Login Button*/}
         <TouchableOpacity
-          //onPress={submit}
+          onPress={submit}
           activeOpacity={0.8}
           style={styles.globalButton}
         >
@@ -118,7 +152,7 @@ export default function Login() {
         <View style={{marginTop: 20, flexDirection: 'row'}}>
           <Text style={{color: '#636e72'}}>Don't have an account? </Text>
           <Text
-            //onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.navigate('Register')}
             style={{color: '#8e44ad', fontWeight: 'bold'}}
           >
             Create Account

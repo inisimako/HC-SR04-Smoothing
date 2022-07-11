@@ -39,8 +39,7 @@ export default function Register() {
   };
 
   const submit = () => {
-    if (email == 'inisimako@gmail.com' && password == 'percobaan')
-      navigation.navigate('Home');
+    //navigation.navigate('Home');
   };
 
   return (
@@ -121,7 +120,7 @@ export default function Register() {
         <View style={{marginTop: 20, flexDirection: 'row'}}>
           <Text style={{color: '#636e72'}}>Already have an account? </Text>
           <Text
-            onPress={() => navigation.navigate('Login')}
+            //onPress={() => navigation.navigate('Login')}
             style={{color: '#6522A8', fontWeight: 'bold'}}
           >
             Login

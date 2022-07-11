@@ -118,7 +118,7 @@ export default function Login() {
         <View style={{marginTop: 20, flexDirection: 'row'}}>
           <Text style={{color: '#636e72'}}>Don't have an account? </Text>
           <Text
-            onPress={() => navigation.navigate('Register')}
+            //onPress={() => navigation.navigate('Register')}
             style={{color: '#8e44ad', fontWeight: 'bold'}}
           >
             Create Account

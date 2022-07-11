@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Router from './assets/pages/router';
 
 export default function App() {
-  return <View />;
+  return <Register />;
 }
 
 const styles = StyleSheet.create({

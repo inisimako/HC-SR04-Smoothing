@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  Dimensions,
   ToastAndroid,
 } from 'react-native';
 import {Feather} from '@expo/vector-icons';
@@ -14,6 +12,7 @@ import {StatusBar} from 'expo-status-bar';
 import * as Font from 'expo-font';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import {initializeApp, getApps} from 'firebase/app';
+import {GlobalStyles} from './global-syle';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -76,11 +75,11 @@ export default function Login({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={GlobalStyles.container}>
       <ImageBackground
         source={require('aplikasi-token-listrik/assets/bg.jpg')}
         resizeMode="cover"
-        style={styles.image}
+        style={GlobalStyles.image}
       >
         {/*Login Title*/}
         <View style={{width: 300}}>
@@ -99,35 +98,35 @@ export default function Login({navigation}) {
 
         {/*Label Email */}
         <View style={{width: 300}}>
-          <Text style={styles.inputLabel}>Email Address</Text>
+          <Text style={GlobalStyles.inputLabel}>Email Address</Text>
         </View>
 
         {/*Text Input Email*/}
-        <View style={styles.input}>
+        <View style={GlobalStyles.input}>
           <Feather name="user" size={22} color="#bdc3c7" />
           <TextInput
             value={email}
             onChangeText={(value) => setEmail(value)}
             placeholder="Enter Email"
-            style={styles.inputText}
+            style={GlobalStyles.inputText}
           ></TextInput>
           <View style={{width: 22}}></View>
         </View>
 
         {/*Label Password */}
         <View style={{width: 300}}>
-          <Text style={styles.inputLabel}>Password</Text>
+          <Text style={GlobalStyles.inputLabel}>Password</Text>
         </View>
 
         {/*Text Input Password*/}
-        <View style={styles.input}>
+        <View style={GlobalStyles.input}>
           <Feather name="lock" size={22} color="#bdc3c7" />
 
           <TextInput
             value={password}
             onChangeText={(value) => setPassword(value)}
             placeholder="Enter Password"
-            style={styles.inputText}
+            style={GlobalStyles.inputText}
             secureTextEntry={showPassword}
           ></TextInput>
 
@@ -144,9 +143,9 @@ export default function Login({navigation}) {
         <TouchableOpacity
           onPress={submit}
           activeOpacity={0.8}
-          style={styles.globalButton}
+          style={GlobalStyles.globalButton}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={GlobalStyles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <View style={{marginTop: 20, flexDirection: 'row'}}>
@@ -163,58 +162,3 @@ export default function Login({navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  input: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 300,
-    height: 50,
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: '#636e72',
-    borderRadius: 25,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  inputText: {
-    width: 200,
-    height: 30,
-    color: '#636e72',
-  },
-
-  inputLabel: {
-    fontSize: 14,
-    color: '#636e72',
-    marginTop: 10,
-    fontWeight: 'bold',
-  },
-  globalButton: {
-    width: 300,
-    height: 50,
-    marginTop: 20,
-    backgroundColor: '#6522A8',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 25,
-  },
-  buttonText: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  image: {
-    flex: 1,
-    width: Dimensions.get('window').width * 1.1,
-    height: Dimensions.get('window').height * 1.1,
-    flex: 1,
-    alignItems: 'center',
-  },
-});

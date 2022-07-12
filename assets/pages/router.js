@@ -31,7 +31,7 @@ export default function Router() {
           name="Home"
           component={Home}
           options={{
-            headerShown: true,
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

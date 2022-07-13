@@ -50,16 +50,16 @@ export default function Login({navigation}) {
   }
 
   const auth = getAuth();
+
   const submit = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
+        // Signed insssss
         const user = userCredential.user;
         navigation.navigate('Home');
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         if (errorCode == 'auth/wrong-password') {
           ToastAndroid.show('Wrong password!', ToastAndroid.LONG);
         } else if (errorCode == 'auth/user-not-found') {
@@ -109,6 +109,7 @@ export default function Login({navigation}) {
             onChangeText={(value) => setEmail(value)}
             placeholder="Enter Email"
             style={GlobalStyles.inputText}
+            keyboardType="email-address"
           ></TextInput>
           <View style={{width: 22}}></View>
         </View>

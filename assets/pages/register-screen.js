@@ -120,6 +120,7 @@ export default function Register({navigation}) {
             onChangeText={(value) => setEmail(value)}
             placeholder="Enter Email"
             style={GlobalStyles.inputText}
+            keyboardType="email-address"
           ></TextInput>
 
           <View style={{width: 22}}></View>

@@ -1,14 +1,14 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  ImageBackground,
   ToastAndroid,
   StyleSheet,
-  Button,
 } from 'react-native';
 import * as Font from 'expo-font';
 import {getDatabase, ref, onValue, set} from 'firebase/database';
@@ -37,7 +37,6 @@ export default function Home() {
     //Fungsi read data
     const db = getDatabase();
     const reference = ref(db, 'data');
-    console.log(reference);
     onValue(reference, (snapshot) => {
       var bal = snapshot.val().balances.replace(/[^\d.-]/g, '');
       setBalances(bal);

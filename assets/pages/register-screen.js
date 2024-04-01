@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  Dimensions,
   ToastAndroid,
 } from 'react-native';
 import {Feather} from '@expo/vector-icons';
@@ -68,7 +67,6 @@ export default function Register({navigation}) {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         if (errorCode === 'auth/email-already-in-use') {
           ToastAndroid.show(
             'That email address is already in use!',

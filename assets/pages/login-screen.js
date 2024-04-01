@@ -10,10 +10,19 @@ import {
 import {Feather} from '@expo/vector-icons';
 import {StatusBar} from 'expo-status-bar';
 import * as Font from 'expo-font';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  initializeAuth,
+} from 'firebase/auth';
 import {initializeApp, getApps} from 'firebase/app';
 import {GlobalStyles} from './global-syle';
+import {getReactNativePersistence} from 'firebase/auth/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {CommonActions} from '@react-navigation/native';
 
+
+// Load Custom Font
 const fetchFonts = () => {
   return Font.loadAsync({
     'Poppins-Black': require('../fonts/Poppins-Black.ttf'),
@@ -45,18 +54,31 @@ export default function Login({navigation}) {
   };
 
   // Initialize Firebase
-  if (!getApps().length) {
-    initializeApp(firebaseConfig);
+  let app;
+  let auth;
+  if (getApps().length < 1) {
+    app = initializeApp(firebaseConfig);
+    auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  } else {
+    auth = getAuth();
   }
-
-  const auth = getAuth();
 
   const submit = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed insssss
-        const user = userCredential.user;
-        navigation.navigate('Home');
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Tab',
+              },
+            ],
+          })
+        );
       })
       .catch((error) => {
         const errorCode = error.code;
